@@ -7,7 +7,7 @@ const useNewsQuery = (category) => {
 
     // Loading State
     const [loading, setLoading] = useState({
-        state: true,
+        state: false,
         message: "",
     })
 
