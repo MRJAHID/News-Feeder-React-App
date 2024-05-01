@@ -1,5 +1,7 @@
+import {getFormattedDate} from "../../utils/getFormattedDate.js";
 
 const Date = () => {
+    const formattedDate = getFormattedDate();
     return (
         <div className="flex items-center space-x-4">
             <svg
@@ -52,7 +54,7 @@ const Date = () => {
                     strokeLinejoin="round"
                 />
             </svg>
-            <span>Thursday, February 25, 2021</span>
+            <span>{formattedDate}</span>
         </div>
     );
 };
