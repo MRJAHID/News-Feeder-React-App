@@ -1,4 +1,10 @@
+import {formatDate} from "../../utils/formatDate.js";
+
 const RightNewsItem = ({index, article}) => {
+
+    // Format Date
+    const formattedDate = formatDate(article.publishedAt);
+
     return (
         <>            {
             index === 0 ? (
@@ -11,7 +17,7 @@ const RightNewsItem = ({index, article}) => {
                     <div className="col-span-12 mt-6 md:col-span-4">
                         <a href="#"
                         ><h3
-                            className="mb-2.5 text-xl font-bold lg:text-[20px]"
+                            className="mb-2.5 text-lg font-bold lg:text-[20px]"
                         >{article.title}
                         </h3></a
                         >
@@ -19,14 +25,14 @@ const RightNewsItem = ({index, article}) => {
                             {article.description}
                         </p>
                         <p className="mt-5 text-base text-[#94908C]">
-                            25 Feb 2021
+                            {formattedDate}
                         </p>
                     </div>
                 </div>
             ) : (
                 <div className="col-span-12 md:col-span-4">
                     <a href="#"><h3
-                        className="mb-2.5 text-xl font-bold lg:text-[20px]"
+                        className="mb-2.5 text-lg font-bold lg:text-[20px]"
                     >
                         {article.title}
                     </h3>
@@ -35,7 +41,7 @@ const RightNewsItem = ({index, article}) => {
                         {article.description}
                     </p>
                     <p className="mt-5 text-base text-[#94908C]">
-                        18 Feb 2021
+                        {formattedDate}
                     </p>
                 </div>
             )

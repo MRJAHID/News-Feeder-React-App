@@ -11,10 +11,12 @@ const NewsBoard = () => {
     const leftNews = newsData.slice(0, splitIndex);
     const rightNews = newsData.slice(splitIndex);
 
+
     return (
         <>
             {loading.state ? (
 
+                // Loading Design
                 <div role="status"
                      className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
                     <div
@@ -36,8 +38,9 @@ const NewsBoard = () => {
                     <span className="sr-only">Loading...</span>
                 </div>
 
-
             ) : (
+
+                // Main NewsBoard
                 <main className="my-10 lg:my-14 px-4">
                     <div className="container mx-auto grid grid-cols-12 gap-8">
                         {/* LeftNewsBoard */}
