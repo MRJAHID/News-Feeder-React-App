@@ -4,12 +4,15 @@ import {NewsContext} from "../../context/index.js";
 import RightNewsItem from "./RightNewsItem.jsx";
 
 const NewsBoard = () => {
-    const {newsData, loading} = useContext(NewsContext);
+    const {newsData, categoryNewsData, loading} = useContext(NewsContext);
 
-    // Divide the news data into two halves
-    const splitIndex = Math.ceil(newsData.length / 2);
-    const leftNews = newsData.slice(0, splitIndex);
-    const rightNews = newsData.slice(splitIndex);
+    // Determine which data to use based on availability
+    const dataToRender = categoryNewsData.length > 0 ? categoryNewsData : newsData;
+
+    // Divide the data into two halves
+    const splitIndex = Math.ceil(dataToRender.length / 2);
+    const leftNews = dataToRender.slice(0, splitIndex);
+    const rightNews = dataToRender.slice(splitIndex);
 
 
     return (
@@ -48,6 +51,7 @@ const NewsBoard = () => {
                             className="col-span-12 grid grid-cols-12 gap-6 self-start xl:col-span-8"
                         >
 
+
                             {leftNews.map((article, index) => (
                                 <LeftNewsItem index={index} key={index} article={article}/>
                             ))}
@@ -57,6 +61,7 @@ const NewsBoard = () => {
                         {/* RightNewsBoard */}
                         <div className="col-span-12 self-start xl:col-span-4">
                             <div className="space-y-6 divide-y-2 divide-[#D5D1C9]">
+
                                 {rightNews.map((article, index) => (
                                     <RightNewsItem index={index} key={index} article={article}/>
                                 ))}
@@ -65,6 +70,7 @@ const NewsBoard = () => {
                         </div>
                     </div>
                 </main>
+
             )}
         </>
 

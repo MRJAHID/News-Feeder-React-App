@@ -1,23 +1,19 @@
 import {useEffect, useState} from "react";
 
 // News Fetch Request Hook
-const useNewsQuery = (category) => {
+const useNewsQuery = () => {
     // NewsData State
     const [newsData, setNewsData] = useState([]);
+    const [categoryNewsData, setCategoryNewsData] = useState([]);
 
     // Loading State
     const [loading, setLoading] = useState({
         state: false,
         message: "",
-    })
+    });
 
     // Error Handling State
     const [error, setError] = useState(null);
-
-    // Api Url
-    const apiUrl = category
-        ? `http://localhost:8000/v2/top-headlines?category=${category}`
-        : `http://localhost:8000/v2/top-headlines`;
 
     // Fetch NewsData
     const fetchNewsData = async () => {
@@ -29,7 +25,7 @@ const useNewsQuery = (category) => {
             })
 
 
-            const response = await fetch(apiUrl);
+            const response = await fetch(`http://localhost:8000/v2/top-headlines`);
 
             if (!response.ok) {
                 const errorMessage = `Fetching News data failed: ${response.status}`;
@@ -51,6 +47,7 @@ const useNewsQuery = (category) => {
         }
     }
 
+    // Load articles on Mount
     useEffect(() => {
         setLoading({
             ...loading,
@@ -60,12 +57,48 @@ const useNewsQuery = (category) => {
 
         fetchNewsData();
 
-    }, [apiUrl]);
+    }, []);
+
+
+    // Fetch articles by selecting Category
+    async function fetchDataFromCategory(category) {
+        try {
+            setLoading({
+                ...loading,
+                state: true,
+                message: 'Fetching Category News Data'
+            })
+
+            const response = await fetch(`http://localhost:8000/v2/top-headlines?category=${category}`);
+
+            if (!response.ok) {
+                const errorMessage = `Fetching Category News data failed: ${response.status}`;
+                throw new Error(errorMessage);
+            }
+
+            const data = await response.json();
+
+            setCategoryNewsData(data.articles)
+
+        } catch (e) {
+            setError(e);
+        } finally {
+            setLoading({
+                ...loading,
+                state: false,
+                message: "",
+            });
+        }
+
+    }
+
 
     return {
         newsData,
         error,
         loading,
+        categoryNewsData,
+        fetchDataFromCategory
     };
 }
 
