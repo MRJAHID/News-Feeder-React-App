@@ -7,7 +7,7 @@ const useNewsQuery = (category) => {
 
     // Loading State
     const [loading, setLoading] = useState({
-        state: false,
+        state: true,
         message: "",
     })
 
@@ -15,7 +15,7 @@ const useNewsQuery = (category) => {
     const [error, setError] = useState(null);
 
     // Api Url
-        const apiUrl = category
+    const apiUrl = category
         ? `http://localhost:8000/v2/top-headlines?category=${category}`
         : `http://localhost:8000/v2/top-headlines`;
 
