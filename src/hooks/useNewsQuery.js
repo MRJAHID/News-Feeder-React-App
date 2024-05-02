@@ -26,8 +26,9 @@ const useNewsQuery = () => {
                 message: 'Fetching News Data'
             })
 
+            const response = await fetch(`http://localhost:8000/v2/top-headlines`);
 
-            const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=2a3a230a908a422cade15407051b810d`);
+            // const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=2a3a230a908a422cade15407051b810d`);
 
             if (!response.ok) {
                 const errorMessage = `Fetching News data failed: ${response.status}`;
@@ -69,8 +70,9 @@ const useNewsQuery = () => {
                 state: true,
                 message: 'Fetching Category News Data'
             })
-
-            const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=2a3a230a908a422cade15407051b810d`);
+            const response = await fetch(`http://localhost:8000/v2/top-headlines?category=${category}`);
+            //
+            // const response = await fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=2a3a230a908a422cade15407051b810d`);
 
             if (!response.ok) {
                 const errorMessage = `Fetching Category News data failed: ${response.status}`;
