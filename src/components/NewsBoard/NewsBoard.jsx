@@ -4,16 +4,16 @@ import {NewsContext} from "../../context/index.js";
 import RightNewsItem from "./RightNewsItem.jsx";
 
 const NewsBoard = () => {
-    const {newsData, categoryNewsData, loading} = useContext(NewsContext);
+    const {newsData, searchNewsData, categoryNewsData, loading} = useContext(NewsContext);
 
     // Determine which data to use based on availability
-    const dataToRender = categoryNewsData.length > 0 ? categoryNewsData : newsData;
+    let dataToRender = categoryNewsData.length > 0 ? categoryNewsData : (searchNewsData.length > 0 ? searchNewsData : newsData);
+
 
     // Divide the data into two halves
     const splitIndex = Math.ceil(dataToRender.length / 2);
     const leftNews = dataToRender.slice(0, splitIndex);
     const rightNews = dataToRender.slice(splitIndex);
-
 
     return (
         <>
